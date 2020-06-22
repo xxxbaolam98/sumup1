@@ -1,0 +1,17 @@
+<?php
+/** @var \Smartosc\Sumup\Block\Blog\BlogDetail $block */
+$blog = $block->displayBlog();
+?>
+<header class="blog__post-header" style="text-align: center;">
+  <h1 class="blog__post-title" itemprop="headline"><?=$blog->getName();?></h1>
+</header>
+<div class="content" style="margin-bottom: 100px;">
+<div style="padding: 20px;">
+<img width="600" height="400" src="<?= $blog->getImageUrl(); ?>" alt="image" id="imgcnt"/><br/>
+<small>Category: <?= $blog->getCategoryNames(); ?></small><br/>
+    <p style="padding: 10px;"><?=$blog->getDescription();?></p><br/>
+<p><?=$blog->getContent();?></p><br/>
+<small>Tags: <?= $blog->getTagNames(); ?></small><br/>
+</div>
+</div>
+

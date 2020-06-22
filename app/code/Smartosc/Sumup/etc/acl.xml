@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Smartosc_Sumup::blogs" title="Blog" sortOrder="51">
+                    <resource id="Smartosc_Sumup::bloglist" title="View Blog" sortOrder="10"/>
+                    <resource id="Smartosc_Sumup::createblog" title="Manage Blog" sortOrder="10"/>
+                    <resource id="Smartosc_Sumup::deleteblog" title="Delete Blog" sortOrder="10"/>
+                    <resource id="Smartosc_Sumup::massupdateblog" title="Mass Update Blog" sortOrder="10"/>
+                    <resource id="Smartosc_Sumup::massdeleteblog" title="Mass Delete Blog" sortOrder="10"/>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

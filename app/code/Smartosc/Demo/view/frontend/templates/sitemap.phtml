@@ -1,0 +1,36 @@
+
+
+<table style="width:100%">
+    <tr>
+        <th>Sitemap_ID</th>
+        <th>Sitemap_Type</th>
+        <th>Sitenap_Filename</th>
+        <th>Sitenap_Path</th>
+        <th>Sitenap_Time</th>
+        <th>Store_ID</th>
+
+
+    </tr>
+    <?php
+    /**
+     * @var \Smartosc\Helloworld\Block\Sitemap $block
+     */
+        $sitemapcollection = $block->sitemaplist();
+        foreach ($sitemapcollection as $sitemap) {
+    ?>
+
+    <tr>
+        <td><?= $sitemap["sitemap_id"]; ?></td>
+        <td><?= $sitemap["sitemap_type"]; ?></td>
+        <td><?= $sitemap["sitemap_filename"]; ?></td>
+        <td><?= $sitemap["sitemap_path"]; ?></td>
+        <td><?= $sitemap["sitemap_time"]; ?></td>
+        <td><?= $sitemap["store_id"]; ?></td>
+
+    </tr>
+
+    <?php
+    }
+    ?>
+
+</table>

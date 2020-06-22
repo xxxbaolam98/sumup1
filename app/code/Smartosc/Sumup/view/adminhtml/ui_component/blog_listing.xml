@@ -1,0 +1,244 @@
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">blog_listing.blog_listing_data_source</item>
+            <item name="deps" xsi:type="string">blog_listing.blog_listing_data_source</item>
+        </item>
+        <item name="spinner" xsi:type="string">spinner_columns</item>
+        <item name="buttons" xsi:type="array">
+            <item name="add" xsi:type="array">
+                <item name="name" xsi:type="string">add</item>
+                <item name="label" xsi:type="string" translate="true">Add New Blog</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="url" xsi:type="string">sumup/blog/edit</item>
+            </item>
+        </item>
+    </argument>
+    <dataSource name="nameOfDataSource">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Smartosc\Sumup\Ui\DataProvider\BlogDataProvider</argument>
+            <argument name="name" xsi:type="string">blog_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">blog_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">blog_id</item>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+        <aclResource>Smartosc_Sumup::bloglist</aclResource>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+<!--        <filterSearch name="fulltext"/>-->
+        <filters name="listing_filters">
+        </filters>
+        <exportButton class="Magento\Ui\Component\ExportButton">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="options" xsi:type="array">
+                        <item name="csv" xsi:type="array">
+                            <item name="value" xsi:type="string">csv</item>
+                            <item name="label" xsi:type="string" translate="true">CSV</item>
+                            <item name="url" xsi:type="string">sumup/blog/gridtocsv</item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </exportButton>
+        <massaction name="listing_massaction">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/tree-massactions</item>
+                    <item name="selectProvider" xsi:type="string">blog_listing.blog_listing.spinner_columns.ids</item>
+                    <item name="indexField" xsi:type="string">blog_id</item>
+                </item>
+            </argument>
+            <action name="delete">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">delete</item>
+                        <item name="label" xsi:type="string" translate="true">Delete</item>
+                        <item name="url" xsi:type="url" path="sumup/blog/massdelete"/>
+                        <item name="confirm" xsi:type="array">
+                            <item name="title" xsi:type="string" translate="true">Delete items</item>
+                            <item name="message" xsi:type="string" translate="true">Are you sure you wan't to delete selected record(s)?</item>
+                        </item>
+                    </item>
+                </argument>
+            </action>
+            <action name="change_status">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">change_status</item>
+                        <item name="label" xsi:type="string" translate="true">Change status</item>
+                        <item name="url" xsi:type="url" path="sumup/blog/massStatus"/>
+                    </item>
+                </argument>
+                <argument name="actions" xsi:type="array">
+                    <item name="0" xsi:type="array">
+                        <item name="type" xsi:type="string">draft</item>
+                        <item name="label" xsi:type="string" translate="true">Draft</item>
+                        <item name="url" xsi:type="url" path="sumup/blog/massStatus">
+                            <param name="status">1</param>
+                        </item>
+                    </item>
+                    <item name="1" xsi:type="array">
+                        <item name="type" xsi:type="string">pending_review</item>
+                        <item name="label" xsi:type="string" translate="true">Pending Review</item>
+                        <item name="url" xsi:type="url" path="sumup/blog/massStatus">
+                            <param name="status">2</param>
+                        </item>
+                    </item>
+                    <item name="2" xsi:type="array">
+                        <item name="type" xsi:type="string">published</item>
+                        <item name="label" xsi:type="string" translate="true">Published</item>
+                        <item name="url" xsi:type="url" path="sumup/blog/massStatus">
+                            <param name="status">3</param>
+                        </item>
+                    </item>
+                </argument>
+            </action>
+        </massaction>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="spinner_columns">
+        <selectionsColumn name="ids">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="resizeEnabled" xsi:type="boolean">false</item>
+                    <item name="resizeDefaultWidth" xsi:type="string">55</item>
+                    <item name="indexField" xsi:type="string">blog_id</item>
+                </item>
+            </argument>
+        </selectionsColumn>
+        <column name="blog_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">textRange</item>
+                    <item name="sorting" xsi:type="string">asc</item>
+                    <item name="label" xsi:type="string" translate="true">ID</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="thumbnail_path" class="Smartosc\Sumup\Ui\Component\Listing\Columns\Thumbnail">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/thumbnail</item>
+                    <item name="sortable" xsi:type="boolean">false</item>
+                    <item name="altField" xsi:type="string">name</item>
+                    <item name="has_preview" xsi:type="string">1</item>
+                    <item name="label" xsi:type="string" translate="true">Thumbnail</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                    <item name="resizeEnabled" xsi:type="boolean">true</item>
+                    <item name="resizeDefaultWidth" xsi:type="string">200</item>
+                </item>
+            </argument>
+        </column>
+        <column name="name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="editor" xsi:type="array">
+                        <item name="editorType" xsi:type="string">text</item>
+                        <item name="validation" xsi:type="array">
+                            <item name="required-entry" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                    <item name="label" xsi:type="string" translate="true">Name</item>
+                </item>
+            </argument>
+        </column>
+        <column name="publish_date_from" class="Magento\Ui\Component\Listing\Columns\Date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">dateRange</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/date</item>
+                    <item name="dataType" xsi:type="string">date</item>
+                    <item name="label" xsi:type="string" translate="true">Publish From</item>
+                </item>
+            </argument>
+        </column>
+        <column name="publish_date_to" class="Magento\Ui\Component\Listing\Columns\Date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">dateRange</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/date</item>
+                    <item name="dataType" xsi:type="string">date</item>
+                    <item name="label" xsi:type="string" translate="true">Publish To</item>
+                </item>
+            </argument>
+        </column>
+        <column name="url_key">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="editor" xsi:type="array">
+                        <item name="editorType" xsi:type="string">text</item>
+                        <item name="validation" xsi:type="array">
+                            <item name="required-entry" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                    <item name="label" xsi:type="string" translate="true">Url Key</item>
+                </item>
+            </argument>
+        </column>
+        <column name="status_id" class="Smartosc\Sumup\Ui\Component\Listing\Columns\Status">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Smartosc\Sumup\Model\Blog\Status</item>
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">select</item>
+<!--                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>-->
+                    <item name="add_field" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">select</item>
+                    <item name="label" xsi:type="string" translate="true">Status</item>
+                    <item name="sortOrder" xsi:type="number">100</item>
+                </item>
+            </argument>
+        </column>
+        <column name="tag_id" class="Smartosc\Sumup\Ui\Component\Listing\Columns\Tags" sortOrder="100">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Smartosc\Sumup\Model\ResourceModel\Tag\Collection</item>
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+<!--                <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>-->
+                    <item name="add_field" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Tags</item>
+                    <item name="sortOrder" xsi:type="number">100</item>
+                </item>
+            </argument>
+        </column>
+    <column name="category_id" class="Smartosc\Sumup\Ui\Component\Listing\Columns\Categories" sortOrder="100">
+        <argument name="data" xsi:type="array">
+            <item name="options" xsi:type="object">Smartosc\Sumup\Model\ResourceModel\Category\Collection</item>
+            <item name="config" xsi:type="array">
+                <item name="filter" xsi:type="string">text</item>
+<!--            <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>-->
+                <item name="add_field" xsi:type="boolean">true</item>
+                <item name="dataType" xsi:type="string">text</item>
+                <item name="label" xsi:type="string" translate="true">Categories</item>
+                <item name="sortOrder" xsi:type="number">100</item>
+            </item>
+        </argument>
+    </column>
+        <actionsColumn name="actions" class="Smartosc\Sumup\Ui\Component\Listing\Columns\BlogAction">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="resizeEnabled" xsi:type="boolean">false</item>
+                    <item name="resizeDefaultWidth" xsi:type="string">107</item>
+                    <item name="indexField" xsi:type="string">blog_id</item>
+                </item>
+            </argument>
+        </actionsColumn>
+    </columns>
+</listing>

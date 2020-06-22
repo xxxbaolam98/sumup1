@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Smartosc_Sumup::blogs" title="blog" translate="title" module="Smartosc_Sumup" sortOrder="50" dependsOnModule="Smartosc_Sumup" resource="Smartosc_Sumup::blogs"/>
+        <add id="Smartosc_Sumup::blogs_blogs" title="Blog List" translate="title" module="Smartosc_Sumup" parent="Smartosc_Sumup::blogs" sortOrder="10" dependsOnModule="Smartosc_Sumup" action="sumup/blog/bloglist" resource="Smartosc_Sumup::blogs"/>
+        <add id="Smartosc_Sumup::blogs_categories" title="Category List" translate="title" module="Smartosc_Sumup" parent="Smartosc_Sumup::blogs" sortOrder="10" dependsOnModule="Smartosc_Sumup" action="sumup/category/categorylist" resource="Smartosc_Sumup::bloglist"/>
+    </menu>
+</config>

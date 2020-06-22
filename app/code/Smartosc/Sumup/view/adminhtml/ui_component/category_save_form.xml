@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">category_save_form.category_save_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Category Information</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="back" class="Smartosc\Sumup\Block\Adminhtml\Category\Edit\BackButton"/>
+            <button name="save" class="Smartosc\Sumup\Block\Adminhtml\Category\Edit\SaveButton"/>
+            <button name="delete" class="Smartosc\Sumup\Block\Adminhtml\Category\Edit\DeleteButton"/>
+        </buttons>
+        <namespace>category_save_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>category_save_form.category_save_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="category_save_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+                <item name="submit_url" xsi:type="url" path="sumup/category/save"/>
+            </item>
+        </argument>
+        <dataProvider class="Smartosc\Sumup\Ui\DataProvider\Form\CategoryDataProvider" name="category_save_form_data_source">
+            <settings>
+                <requestFieldName>category_id</requestFieldName>
+                <primaryFieldName>category_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <container name="main">
+        <fieldset name="category_details">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">General</item>
+                    <item name="collapsible" xsi:type="boolean">true</item>
+                    <item name="opened" xsi:type="boolean">true</item>
+                </item>
+            </argument>
+            <field name="category_id"  formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">category_save</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <visible>false</visible>
+                    <dataScope>category_id</dataScope>
+                </settings>
+            </field>
+            <field name="category_name" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">category_save</item>
+                    </item>
+                </argument>
+                <settings>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <dataType>text</dataType>
+                    <label translate="true">Category Name</label>
+                    <dataScope>category_name</dataScope>
+                </settings>
+            </field>
+
+            <field name="parent_id">
+                <argument name="data" xsi:type="array">
+                    <item name="options" xsi:type="object">Smartosc\Sumup\Model\Category\Category</item>
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Parent Category</item>
+                        <item name="componentType" xsi:type="string">field</item>
+                        <item name="formElement" xsi:type="string">select</item>
+                        <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                        <item name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</item>
+                        <item name="filterOptions" xsi:type="boolean">true</item>
+                        <item name="chipsEnabled" xsi:type="boolean">true</item>
+                        <item name="showCheckbox" xsi:type="boolean">true</item>
+                        <item name="disableLabel" xsi:type="boolean">true</item>
+                        <item name="multiple" xsi:type="boolean">false</item>
+                        <item name="levelsVisibility" xsi:type="number">2</item>
+                        <item name="source" xsi:type="string">category_save</item>
+                        <item name="dataScope" xsi:type="string">parent_id</item>
+                        <item name="validation" xsi:type="array">
+                            <item name="required-entry" xsi:type="boolean">false</item>
+                        </item>
+                    </item>
+                </argument>
+            </field>
+
+        </fieldset>
+    </container>
+</form>

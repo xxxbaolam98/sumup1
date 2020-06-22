@@ -1,0 +1,45 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Smartosc\Sumup\Api\Data\CategoryInterface" type="Smartosc\Sumup\Model\Category" />
+    <preference for="Smartosc\Sumup\Api\CategoryRepositoryInterface" type="Smartosc\Sumup\Model\CategoryRepository" />
+<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+    <arguments>
+        <argument name="collections" xsi:type="array">
+            <item name="smartosc_sumup_blog_listing_data_source" xsi:type="string">Smartosc\Sumup\Model\ResourceModel\Sumup\Grid\Collection</item>
+        </argument>
+    </arguments>
+</type>
+<type name="Smartosc\Sumup\Model\ResourceModel\Sumup\Grid\Collection">
+<arguments>
+    <argument name="mainTable" xsi:type="string">sumup_blog</argument>
+    <argument name="eventPrefix" xsi:type="string">smartosc_sumup_grid_collection</argument>
+    <argument name="eventObject" xsi:type="string">smartosc_grid_collection</argument>
+    <argument name="resourceModel" xsi:type="string">Smartosc\Sumup\Model\ResourceModel\Sumup</argument>
+</arguments>
+</type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="smartosc_sumup_category_listing_data_source" xsi:type="string">Smartosc\Sumup\Model\ResourceModel\CategorySumup\Grid\Collection</item>
+                <item name="smartosc_sumup_category_save_form_data_source" xsi:type="string">Smartosc\Sumup\Model\ResourceModel\CategorySumup\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Smartosc\Sumup\Model\ResourceModel\CategorySumup\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">sumup_category</argument>
+            <argument name="eventPrefix" xsi:type="string">smartosc_sumup_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">smartosc_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Smartosc\Sumup\Model\ResourceModel\CategorySumup</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\Model\Entity\RepositoryFactory">
+        <arguments>
+            <argument name="entities" xsi:type="array">
+                <item name="Smartosc\Sumup\Api\Data\CategoryInterface" xsi:type="string">Smartosc\Sumup\Api\CategoryRepositoryInterface</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Theme\Block\Html\Topmenu">
+        <plugin name="add_menu_item_plugin" type="Smartosc\Sumup\Plugin\Topmenu" sortOrder="10" disabled="false"/>
+    </type>
+</config>

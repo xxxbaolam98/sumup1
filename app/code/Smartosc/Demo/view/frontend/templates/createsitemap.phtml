@@ -1,0 +1,16 @@
+
+<?php
+if($block->getConfig()) {
+?>
+
+<form action="<?= $block->getUrl('demo/index/savesitemap'); ?>" method="post">
+    Sitemap Type: <input type="text" name="sitemap_type"><br>
+    Sitemap Filename: <input type="text" name="sitemap_filename"><br>
+    Sitemap Path: <input type="text" name="sitemap_path"><br>
+    Sitemap Time: <input type="date" name="sitemap_time"><br>
+    Store ID: <input type="number" name="store_id"><br>
+    <input type="submit">
+</form>
+<?php
+}
+?>

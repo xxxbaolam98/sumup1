@@ -1,0 +1,112 @@
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="sumup_blog_status">
+        <column xsi:type="int" name="status_id" padding="10" unsigned="true" nullable="false" identity="true" comment="status_id"/>
+        <column xsi:type="varchar" name="status_name" length="255" nullable="false" comment="status_name"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="status_id"/>
+        </constraint>
+       <index referenceId="INDEX_STATUS" indexType="fulltext">
+           <column name="status_name"/>
+       </index>
+    </table>
+    <table name="sumup_blog">
+        <column xsi:type="int" name="blog_id" padding="10" unsigned="true" nullable="false" comment="blog_id" identity="true"/>
+        <column xsi:type="varchar" name="name" length="255" nullable="false" comment="name"/>
+        <column xsi:type="longtext" name="short_description" nullable="false" comment="short description"/>
+        <column xsi:type="longtext" name="description" nullable="false" comment="description"/>
+        <column xsi:type="longtext" name="content" nullable="false" comment="content"/>
+        <column xsi:type="int" name="status_id" padding="10" unsigned="true" nullable="false" comment="status_id"/>
+        <column xsi:type="date" name="publish_date_from"  nullable="true" comment="publish_date_from"/>
+        <column xsi:type="date" name="publish_date_to"  nullable="true" comment="publish_date_to"/>
+        <column xsi:type="varchar" name="url_key" length="255" nullable="false" comment="url_key"/>
+        <column xsi:type="varchar" name="thumbnail_path" length="255" nullable="false" default="" comment="thumbnail"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="blog_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FL_STATUS_ID" table="sumup_blog"
+                    column="status_id" referenceTable="sumup_blog_status" referenceColumn="status_id"
+                    onDelete="CASCADE"/>
+       <index referenceId="INDEX_NAME" indexType="fulltext">
+           <column name="name"/>
+       </index>
+<!--       <index referenceId="INDEX_URLKEY" indexType="fulltext">-->
+<!--           <column name="url_key"/>-->
+<!--       </index>-->
+    </table>
+    <table name="sumup_blog_gallery">
+        <column xsi:type="int" name="image_id" padding="10" identity="true" unsigned="true" nullable="false" comment="image_id"/>
+        <column xsi:type="varchar" name="image_path" length="255" nullable="false" comment="image_path"/>
+        <column xsi:type="int" name="blog_id" padding="10" unsigned="true" nullable="false" comment="blog_id"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="image_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FL_BLOG_ID" table="sumup_blog_gallery"
+                    column="blog_id" referenceTable="sumup_blog" referenceColumn="blog_id"
+                    onDelete="CASCADE"/>
+    </table>
+    <table name="sumup_tag">
+        <column xsi:type="int" name="tag_id" padding="10" identity="true" unsigned="true" nullable="false" comment="tag_id"/>
+        <column xsi:type="varchar" name="tag_name" length="255" nullable="false" comment="tag_name"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="tag_id"/>
+        </constraint>
+      <index referenceId="INDEX_TAG" indexType="fulltext">
+           <column name="tag_name"/>
+      </index>
+    </table>
+    <table name="sumup_blog_tag">
+        <column xsi:type="int" name="blog_tag_id" padding="10" identity="true" unsigned="true" nullable="false" comment="blog_tag_id"/>
+        <column xsi:type="int" name="blog_id" padding="10" unsigned="true" nullable="false" comment="blog_id"/>
+        <column xsi:type="int" name="tag_id" padding="10" unsigned="true" nullable="false" comment="tag_id"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="blog_tag_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FL_BLOGTAG_ID" table="sumup_blog_tag"
+                    column="blog_id" referenceTable="sumup_blog" referenceColumn="blog_id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="FL_TAG_ID" table="sumup_blog_tag"
+                    column="tag_id" referenceTable="sumup_tag" referenceColumn="tag_id"
+                    onDelete="CASCADE"/>
+    </table>
+    <table name="sumup_blog_products">
+        <column xsi:type="int" name="blog_product_id" padding="10" identity="true" unsigned="true" nullable="false" comment="blog_product_id"/>
+        <column xsi:type="int" name="blog_id" padding="10" unsigned="true" nullable="false" comment="blog_id"/>
+        <column xsi:type="int" name="product_id" padding="10" unsigned="true" nullable="false" comment="product_id"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="blog_product_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FL_BLOGPRODUCT_ID" table="sumup_blog_products"
+                    column="blog_id" referenceTable="sumup_blog" referenceColumn="blog_id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="FL_PRODUCTBLOG_ID" table="sumup_blog_products"
+                    column="product_id" referenceTable="catalog_product_entity" referenceColumn="entity_id"
+                    onDelete="CASCADE"/>
+    </table>
+    <table name="sumup_category">
+        <column xsi:type="int" name="category_id" padding="10" identity="true" unsigned="true" nullable="false" comment="category_id"/>
+        <column xsi:type="varchar" name="category_name" length="255" nullable="false" comment="category_name"/>
+        <column xsi:type="int" name="parent_id" padding="10" unsigned="true" nullable="false" comment="parent_id"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="category_id"/>
+        </constraint>
+       <index referenceId="INDEX_CATEGORY" indexType="fulltext">
+           <column name="category_name"/>
+      </index>
+    </table>
+    <table name="sumup_blog_category">
+        <column xsi:type="int" name="blogcategory_id" padding="10" identity="true" unsigned="true" nullable="false" comment="blogcategory_id"/>
+        <column xsi:type="int" name="blog_id" padding="10" unsigned="true" nullable="false" comment="blog_id"/>
+        <column xsi:type="int" name="category_id" padding="10" unsigned="true" nullable="false" comment="category_id"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="blogcategory_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FL_CATEGORY_ID" table="sumup_blog_category"
+                    column="category_id" referenceTable="sumup_category" referenceColumn="category_id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="FL_BLOGCATEGORY_ID" table="sumup_blog_category"
+                    column="blog_id" referenceTable="sumup_blog" referenceColumn="blog_id"
+                    onDelete="CASCADE"/>
+    </table>
+
+</schema>

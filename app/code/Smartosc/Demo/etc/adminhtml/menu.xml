@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Smartosc_Demo::sitemaps" title="Sitemap" translate="title" module="Smartosc_Demo" sortOrder="50" dependsOnModule="Smartosc_Demo" resource="Smartosc_Demo::sitemaps"/>
+        <add id="Smartosc_Demo::sitemaps_sitemaps" title="Sitemap List" translate="title" module="Smartosc_Demo" parent="Smartosc_Demo::sitemaps" sortOrder="10" dependsOnModule="Smartosc_Demo" action="demo/sitemap/sitemaplist" resource="Smartosc_Demo::sitemaps"/>
+    </menu>
+</config>

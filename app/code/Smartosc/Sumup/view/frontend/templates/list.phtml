@@ -1,0 +1,46 @@
+<?php
+/** @var BlogList $block */
+
+use Smartosc\Sumup\Model\Blog;
+use Smartosc\Sumup\Block\Blog\BlogList;
+ ?>
+    <div class="blog__sidebar-search">
+        <form method="get" action="<?= $block->getSearchUrl(); ?>">
+            <input type="search" name="q" placeholder="<?= __('Search...') ?>" class="input-text required-entry"
+                   value=""/>
+
+            <button class="primary" title="Submit" type="submit" style="margin: 20px;">Search
+            </button>
+        </form>
+    </div>
+<?php
+$gridrecords = $block->getCustomCollection();
+?>
+<?php if ($gridrecords && count($gridrecords)): ?>
+    <div  class="blog__post-list-wrapper">
+        <ol class="blog__post-list">
+        <div class="content">
+            <?php foreach ($gridrecords as $item): ?>
+            <?php $gridrecords->getTagCategory($item->getId()); ?>
+                <div style="padding: 20px;">
+                    <header class="blog__post-header">
+                    <a href = "<?= $block->getBlogUrl() . "blog_id/" . $item->getId(); ?>"><h1 class="blog__post-title" itemprop="headline"><?=$item->getName();?></h1></a>
+                    </header>
+                    <a href = "<?= $block->getBlogUrl() . "blog_id/" . $item->getId(); ?>"><img width="400" height="200" src="<?= $item->getImageUrl(); ?>" alt="image" id="imgcnt"></a>
+
+                    <p><?=$item->getShortDescription();?></p>
+                        <small>Tags: <?= $item->getTagNames(); ?></small><br/>
+                        <a href="<?= $block->getBlogUrl() . "blog_id/" . $item->getId(); ?>"><u><i>Read more...</i></u></a>
+                </div>
+
+            <?php endforeach; ?>
+        </div>
+        </ol>
+    </div>
+
+    <?php if ($block->getPagerHtml()): ?>
+        <div class="order-products-toolbar toolbar bottom"><?php echo $block->getPagerHtml(); ?></div>
+    <?php endif ?>
+<?php else: ?>
+    <div class="message info empty"><span><?php echo __('No any record.'); ?></span></div>
+<?php endif ?>

@@ -1,0 +1,47 @@
+<?php
+/** @var \Smartosc\Sumup\Block\Blog\Products $block */
+$products = $block->displayProducts();
+?>
+<h2 class="w3-center">Products</h2>
+<?php if ($products != null) { ?>
+<div class="w3-content w3-display-container">
+    <?php foreach ($products as $item): ?>
+
+    <div class="mySlides">
+        <img width="100" height="200" src="<?= $block->getProductThumbnail($item->getData('thumbnail')); ?>">
+       <h4><?= $item->getData('name'); ?></h4>
+       <h4>Price: <?= $block->getFormattedPrice($item->getData('price')); ?></h4>
+    </div>
+    <?php endforeach; ?>
+
+
+    <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+    <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+</div>
+
+<script>
+    var slideIndex = 1;
+    showDivs(slideIndex);
+
+    function plusDivs(n) {
+        showDivs(slideIndex += n);
+    }
+
+    function showDivs(n) {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        if (n > x.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = x.length}
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        x[slideIndex-1].style.display = "block";
+    }
+</script>
+<?php } else { ?>
+    <small>No related Products.</small>
+<?php
+}
+?>
+
+

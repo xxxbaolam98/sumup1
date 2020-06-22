@@ -1,0 +1,24 @@
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+     <table name="declare_blog">
+        <column xsi:type="int" name="id_blog" padding="10" unsigned="true" nullable="false" comment="blog_id"/>
+        <column xsi:type="text" name="title" nullable="false" comment="title"/>
+        <column xsi:type="longtext" name="content" nullable="false" comment="Title"/>
+         <column xsi:type="varchar" name="author" length="255" nullable="false" comment="author"/>
+         <constraint xsi:type="primary" referenceId="PRIMARY">
+                <column name="id_blog"/>
+        </constraint>
+    </table>
+    <table name="declare_blog_comment">
+        <column xsi:type="int" name="id_comment" padding="10" unsigned="true" nullable="false" comment="comment_id"/>
+        <column xsi:type="int" name="id_blog" padding="10" unsigned="true" nullable="false" comment="blog_id"/>
+        <column xsi:type="mediumtext" name="content" nullable="false" comment="content"/>
+        <column xsi:type="varchar" name="author" length="255" nullable="false" comment="author"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id_comment"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FL_BLOG_ID" table="declare_blog_comment"
+                   column="id_blog" referenceTable="declare_blog" referenceColumn="id_blog"
+                    onDelete="CASCADE"/>
+    </table>
+</schema>
