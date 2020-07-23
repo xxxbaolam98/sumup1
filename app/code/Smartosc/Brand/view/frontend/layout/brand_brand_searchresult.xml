@@ -1,0 +1,14 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="Smartosc\Brand\Block\Brand\Search" name="brand.search.result" cacheable="false" >
+<!--                <block class="Smartosc\Brand\Block\Toolbar" name="brand_toolbar" template="Smartosc_Brand::toolbar.phtml">-->
+<!--                    <block class="Magento\Theme\Block\Html\Pager" name="brand_list_toolbar_pager"/>-->
+<!--                </block>-->
+            </block>
+        </referenceContainer>
+        <referenceContainer name="sidebar.main">
+            <block class="Magento\Framework\View\Element\Template" name="brand.searchform.main" template="Smartosc_Brand::search/form.phtml" before="-"/>
+        </referenceContainer>
+    </body>
+</page>

@@ -261,6 +261,7 @@ return [
         'Klarna_Kp' => 1,
         'Magento_PaypalReCaptcha' => 1,
         'MSP_TwoFactorAuth' => 1,
+        'Smartosc_Brand' => 1,
         'Smartosc_Declare' => 1,
         'Smartosc_Demo' => 1,
         'Smartosc_Helloworld' => 1,

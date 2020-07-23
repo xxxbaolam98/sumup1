@@ -1,6 +1,6 @@
 <?php
 
-namespace Smartosc\Brand\Block;
+namespace Smartosc\Brand\Block\Group;
 
 class Brandlist extends \Magento\Framework\View\Element\Template
 {
@@ -23,6 +23,8 @@ class Brandlist extends \Magento\Framework\View\Element\Template
 
     protected $_collection;
 
+    protected $_storeManager;
+
     /**
      * @param \Magento\Framework\View\Element\Template\Context $context
      * @param \Magento\Framework\Registry                      $registry
@@ -36,55 +38,67 @@ class Brandlist extends \Magento\Framework\View\Element\Template
         \Magento\Framework\Registry $registry,
         \Smartosc\Brand\Helper\Data $brandHelper,
         \Smartosc\Brand\Model\BrandFactory $brand,
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
         array $data = []
     ) {
+        $this->_storeManager = $storeManager;
         $this->_brand = $brand;
         $this->_coreRegistry = $registry;
         $this->_brandHelper = $brandHelper;
         parent::__construct($context, $data);
     }
 
-    /**
-     * Prepare breadcrumbs
-     *
-     * @param \Magento\Cms\Model\Page $brand
-     * @throws \Magento\Framework\Exception\LocalizedException
-     * @return void
-     */
-
-    /**
-     * Set brand collection
-     * @param \Smartosc\Brand\Model\Brand
-     */
-    public function setCollection($collection)
-    {
-        $this->_collection = $collection;
-        return $this->_collection;
-    }
-
-    /**
-     * Retrive brand collection
-     * @param \Smartosc\Brand\Model\Brand
-     */
     public function getBrandCollection()
     {
-        $first_char = $this->getRequest()->getParam('letter');
+        $storeid =  $this->_storeManager->getStore()->getId();
+        $page = ($this->getRequest()->getParam('p')) ? $this->getRequest()->getParam('p') : 1;
+        $pageSize = 5;
+        $first_char = $this->getFirstChar();
         $brand = $this->_brand->create();
         $collection = $brand->getCollection();
         $collection->getSelect()->reset(\Magento\Framework\DB\Select::ORDER);
         $collection->setOrder('position', 'ASC');
+        $collection->addFieldToFilter('store_id', ['in' => [0,$storeid]]);
         $collection->addFieldToFilter('status', 1);
         $collection->addFieldToFilter('name', ['like' => $first_char . '%']);
+        $collection->setPageSize($pageSize);
+        $collection->setCurPage($page);
         $this->_collection = $collection;
-        return $this->_collection;
+        return $collection;
     }
 
-    public function getConfig($key, $default = '')
+    public function getFirstChar()
     {
-        $result = $this->_brandHelper->getConfig($key);
-        if (!$result) {
-            return $default;
+        return $this->getRequest()->getParam('group');
+    }
+
+    /**
+     * Prepare global layout
+     *
+     * @return $this
+     */
+    protected function _prepareLayout()
+    {
+        parent::_prepareLayout();
+        $this->pageConfig->addBodyClass('brand-groupbrandlist');
+        $first_char = $this->getFirstChar();
+        $this->pageConfig->getTitle()->set('Brand Group ' . $first_char);
+        if ($this->getBrandCollection()) {
+            $pager = $this->getLayout()->createBlock(
+                'Magento\Theme\Block\Html\Pager',
+                'brandgroup.history.pager'
+            )->setAvailableLimit([5 => 5, 10 => 10, 15 => 15, 20 => 20])
+                ->setShowPerPage(false)->setCollection(
+                    $this->getBrandCollection()
+                );
+            $this->setChild('pager', $pager);
+            $this->getBrandCollection()->load();
         }
-        return $result;
+        return $this;
+    }
+
+    public function getPagerHtml()
+    {
+        return $this->getChildHtml('pager');
     }
 }

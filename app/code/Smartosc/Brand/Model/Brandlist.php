@@ -2,7 +2,7 @@
 
 namespace Smartosc\Brand\Model;
 
-class BrandList extends \Magento\Eav\Model\Entity\Attribute\Source\AbstractSource
+class Brandlist extends \Magento\Eav\Model\Entity\Attribute\Source\AbstractSource
 {
     protected $_brand;
 
@@ -43,12 +43,6 @@ class BrandList extends \Magento\Eav\Model\Entity\Attribute\Source\AbstractSourc
         $options = [];
         $options = $this->getAvailableTemplate();
 
-        if ($withEmpty) {
-            array_unshift($options, [
-                'value' => '',
-                'label' => '-- Please Select --',
-            ]);
-        }
         return $options;
     }
 }

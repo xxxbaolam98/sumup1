@@ -3,7 +3,7 @@ namespace Smartosc\Brand\Controller\Brand;
 
 use Magento\Framework\App\Action\Context;
 
-class Productlist extends \Magento\Framework\App\Action\Action
+class BrandDetail extends \Magento\Framework\App\Action\Action
 {
 
     /**

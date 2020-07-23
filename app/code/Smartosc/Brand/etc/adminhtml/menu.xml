@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Smartosc_Brand::brand" title="Brand" translate="title" module="Smartosc_Brand" sortOrder="50" dependsOnModule="Smartosc_Brand" resource="Smartosc_Sumup::brand"/>
+        <add id="Smartosc_Brand::brand_brands" title="Brand" translate="title" module="Smartosc_Brand" parent="Smartosc_Brand::brand" sortOrder="10" dependsOnModule="Smartosc_Brand" action="brand/brand/brandlist" resource="Smartosc_Brand::brands"/>
+        <add id="Smartosc_Brand::brand_brandsetting" title="Brand Setting" translate="title" module="Smartosc_Brand" parent="Smartosc_Brand::brand" sortOrder="10" dependsOnModule="Smartosc_Brand" action="admin/system_config/edit/section/brand" resource="Smartosc_Brand::brands"/>
+    </menu>
+</config>

@@ -1,0 +1,10 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="Smartosc\Brand\Block\Group\Brandlist" name="brand.list" template="Smartosc_Brand::group/brandlist.phtml" cacheable="false" />
+        </referenceContainer>
+        <referenceContainer name="sidebar.main">
+            <block class="Magento\Framework\View\Element\Template" name="brand.searchform.main" template="Smartosc_Brand::search/form.phtml" before="-"/>
+        </referenceContainer>
+    </body>
+</page>

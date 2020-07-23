@@ -1,34 +1,19 @@
 <?php
-namespace Smartosc\Brand\Model\ResourceModel\Brand\Grid;
+namespace Smartosc\Brand\Model\ResourceModel\Sumup\Grid;
 
 use Magento\Framework\Api\Search\SearchResultInterface;
 use Magento\Framework\Search\AggregationInterface;
-use Smartosc\Brand\Model\ResourceModel\Brand\Collection as BrandCollection;
+use Smartosc\Brand\Model\ResourceModel\Sumup\Collection as SumupCollection;
 
 /**
  * Class Collection
- * Collection for displaying grid of sales documents
+ * Collection for displaying grid
  */
-class Collection extends BrandCollection implements SearchResultInterface
+class Collection extends SumupCollection implements SearchResultInterface
 {
     /**
-     * @var AggregationInterface
-     */
-    protected $aggregations;
-
-    /**
-     * @param \Magento\Framework\Data\Collection\EntityFactoryInterface    $entityFactory
-     * @param \Psr\Log\LoggerInterface                                     $logger
-     * @param \Magento\Framework\Data\Collection\Db\FetchStrategyInterface $fetchStrategy
-     * @param \Magento\Framework\Event\ManagerInterface                    $eventManager
-     * @param \Magento\Store\Model\StoreManagerInterface                   $storeManager
-     * @param [type]                                                       $mainTable
-     * @param [type]                                                       $eventPrefix
-     * @param [type]                                                       $eventObject
-     * @param [type]                                                       $resourceModel
-     * @param string                                                       $model
-     * @param [type]                                                       $connection
-     * @param \Magento\Framework\Model\ResourceModel\Db\AbstractDb|null         $resource
+     * Resource initialization
+     * @return $this
      */
     public function __construct(
         \Magento\Framework\Data\Collection\EntityFactoryInterface $entityFactory,
@@ -69,13 +54,14 @@ class Collection extends BrandCollection implements SearchResultInterface
 
     /**
      * @param AggregationInterface $aggregations
+     *
      * @return $this
      */
     public function setAggregations($aggregations)
     {
         $this->aggregations = $aggregations;
     }
-    
+
 
     /**
      * Get search criteria.
@@ -91,11 +77,13 @@ class Collection extends BrandCollection implements SearchResultInterface
      * Set search criteria.
      *
      * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
+     *
      * @return $this
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function setSearchCriteria(\Magento\Framework\Api\SearchCriteriaInterface $searchCriteria = null)
-    {
+    public function setSearchCriteria(
+        \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria = null
+    ) {
         return $this;
     }
 
@@ -113,6 +101,7 @@ class Collection extends BrandCollection implements SearchResultInterface
      * Set total count.
      *
      * @param int $totalCount
+     *
      * @return $this
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
@@ -125,6 +114,7 @@ class Collection extends BrandCollection implements SearchResultInterface
      * Set items list.
      *
      * @param \Magento\Framework\Api\ExtensibleDataInterface[] $items
+     *
      * @return $this
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
@@ -132,4 +122,7 @@ class Collection extends BrandCollection implements SearchResultInterface
     {
         return $this;
     }
+
 }
+
+?>

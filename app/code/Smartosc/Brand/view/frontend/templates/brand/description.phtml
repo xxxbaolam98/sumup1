@@ -1,0 +1,10 @@
+<?php if ($_description = $block->getCurrentBrand()->getDescription()): ?>
+    <div class="brand-description">
+        <?php echo $this->helper('Smartosc\Brand\Helper\Data')->filter($_description) ?>
+    </div>
+<?php endif; ?>
+<?php if ($_country = $block->getCurrentBrand()->getCountryName()): ?>
+    <div class="brand-description">
+        <?php echo "From Country: " . $this->helper('Smartosc\Brand\Helper\Data')->filter($_country) ?>
+    </div>
+<?php endif; ?>

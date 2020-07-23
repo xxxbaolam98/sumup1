@@ -121,3 +121,10 @@
 }
 
 .pagination a:hover:not(.active) {background-color: #ddd;}
+
+
+.pagination a.disable {
+    background-color: dimgrey;
+    color: white;
+    border: 1px solid #4CAF50;
+}

@@ -39,7 +39,7 @@
             </argument>
         </arguments>
     </type>
-    <type name="Magento\Theme\Block\Html\Topmenu">
-        <plugin name="add_menu_item_plugin" type="Smartosc\Sumup\Plugin\Topmenu" sortOrder="10" disabled="false"/>
-    </type>
+<!--    <type name="Magento\Theme\Block\Html\Topmenu">-->
+<!--        <plugin name="add_menu_item_plugin" type="Smartosc\Sumup\Plugin\Topmenu" sortOrder="10" disabled="false"/>-->
+<!--    </type>-->
 </config>
